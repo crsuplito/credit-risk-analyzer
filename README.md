@@ -14,7 +14,7 @@ Getting this decision wrong has consequences in both directions. Approving too m
 
 This challenge is known as **credit risk assessment** — one of the most critical functions in banking and financial services. Traditionally, credit analysts evaluated applications manually using a combination of bureau scores, income verification, and judgment. As loan volumes grew, institutions began building **automated credit scoring models** that quantify the likelihood of default using historical borrower data.
 
-The stakes are high. According to the Basel III regulatory framework, banks are required to hold capital reserves proportional to their credit risk exposure. An inaccurate risk model can therefore mean either under-reserving (dangerous) or over-reserving (inefficient). In the Philippine context, the Bangko Sentral ng Pilipinas (BSP) similarly mandates that covered institutions maintain robust credit risk management systems under its risk-based capital adequacy framework.
+The stakes are high and according to the Basel III regulatory framework, banks are required to hold capital reserves proportional to their credit risk exposure. An inaccurate risk model can therefore mean either under-reserving (dangerous) or over-reserving (inefficient). In the Philippine context, the Bangko Sentral ng Pilipinas (BSP) similarly mandates that covered institutions maintain robust credit risk management systems under its risk-based capital adequacy framework.
 
 This project builds a simplified but realistic version of that scoring system — a tool that ingests borrower attributes, computes a composite risk score, and classifies applicants into actionable risk tiers.
 
