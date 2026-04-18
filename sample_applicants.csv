@@ -1,0 +1,11 @@
+id,name,credit_score,dti_ratio,employment_status,ltv_ratio,missed_payments,loan_amount
+APP-0001,Juan dela Cruz,720,0.28,employed,0.75,0,2500000
+APP-0002,Maria Santos,580,0.52,unemployed,0.95,3,800000
+APP-0003,Pedro Reyes,680,0.38,self-employed,0.82,1,1500000
+APP-0004,Ana Garcia,790,0.18,employed,0.60,0,4000000
+APP-0005,Carlo Mendoza,620,0.45,employed,0.88,2,1200000
+APP-0006,Liza Aquino,510,0.60,unemployed,1.02,5,600000
+APP-0007,Ramon Bautista,740,0.22,employed,0.70,0,3200000
+APP-0008,Gloria Ramos,660,0.35,self-employed,0.79,1,1800000
+APP-0009,Eduardo Torres,590,0.48,employed,0.91,2,900000
+APP-0010,Josie Villanueva,810,0.15,employed,0.55,0,5000000
