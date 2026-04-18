@@ -114,7 +114,7 @@ pip install -r requirements.txt
 ### 3. Run the analyzer
 
 ```bash
-python credit_risk.py
+python credit_risk_analyzer.py
 ```
 
 ---
