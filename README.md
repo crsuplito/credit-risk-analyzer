@@ -1,4 +1,4 @@
-<img width="65" height="21" alt="image" src="https://github.com/user-attachments/assets/52d976df-3742-4c92-9f1d-b96a45612155" /># 💳 Credit Risk Analyzer
+# 💳 Credit Risk Analyzer
 
 A beginner-friendly Python CLI tool for **credit risk scoring and portfolio analysis** — built on top of the real-world [Kaggle Credit Risk Dataset](https://www.kaggle.com/datasets/laotse/credit-risk-dataset).
 
