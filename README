@@ -1,0 +1,225 @@
+# 💳 Credit Risk Analyzer
+
+A beginner-friendly Python CLI tool for **credit risk scoring and portfolio analysis** — built on top of the real-world [Kaggle Credit Risk Dataset](https://www.kaggle.com/datasets/laotse/credit-risk-dataset).
+
+Built with **zero external dependencies for core logic** (matplotlib/numpy are optional for charts).
+
+---
+
+## 🏦 Introduction to the Problem
+
+Every time a bank or lending institution receives a loan application, it faces a fundamental question: **will this borrower repay their debt, or will they default?**
+
+Getting this decision wrong has consequences in both directions. Approving too many risky borrowers leads to loan losses that erode capital and destabilize the institution. Being overly conservative means denying creditworthy applicants — lost business and, in broader terms, reduced financial inclusion.
+
+This challenge is known as **credit risk assessment** — one of the most critical functions in banking and financial services. Traditionally, credit analysts evaluated applications manually using a combination of bureau scores, income verification, and judgment. As loan volumes grew, institutions began building **automated credit scoring models** that quantify the likelihood of default using historical borrower data.
+
+The stakes are high. According to the Basel III regulatory framework, banks are required to hold capital reserves proportional to their credit risk exposure. An inaccurate risk model can therefore mean either under-reserving (dangerous) or over-reserving (inefficient). In the Philippine context, the Bangko Sentral ng Pilipinas (BSP) similarly mandates that covered institutions maintain robust credit risk management systems under its risk-based capital adequacy framework.
+
+This project builds a simplified but realistic version of that scoring system — a tool that ingests borrower attributes, computes a composite risk score, and classifies applicants into actionable risk tiers.
+
+---
+
+## 📦 About the Dataset
+
+This project is anchored on the publicly available **[Credit Risk Dataset](https://www.kaggle.com/datasets/laotse/credit-risk-dataset)** published on Kaggle by `laotse`. The dataset simulates credit bureau data and contains **32,581 loan records** across **12 features**, making it an ideal benchmark for learning and prototyping credit risk models.
+
+**Dataset source:** https://www.kaggle.com/datasets/laotse/credit-risk-dataset
+
+### Features
+
+| Column | Type | Description |
+|---|---|---|
+| `person_age` | int | Age of the borrower |
+| `person_income` | int | Annual income (USD) |
+| `person_home_ownership` | string | Home ownership status (RENT / OWN / MORTGAGE / OTHER) |
+| `person_emp_length` | float | Employment length in years |
+| `loan_intent` | string | Purpose of the loan (PERSONAL / EDUCATION / MEDICAL / etc.) |
+| `loan_grade` | string | Loan grade assigned by lender (A–G) |
+| `loan_amnt` | int | Loan amount requested |
+| `loan_int_rate` | float | Interest rate on the loan |
+| `loan_status` | int | **Target variable** — 0 = Non-default, 1 = Default |
+| `loan_percent_income` | float | Loan amount as a proportion of annual income |
+| `cb_person_default_on_file` | string | Historical default on credit bureau record (Y/N) |
+| `cb_person_cred_hist_length` | int | Credit history length in years |
+
+### Key Characteristics
+- **Size:** 32,581 rows × 12 columns
+- **Target variable:** `loan_status` (binary — default or no default)
+- **Class imbalance:** ~78% non-default, ~22% default — realistic of real lending portfolios
+- **Missing values:** Present in `person_emp_length` and `loan_int_rate` — requires handling
+- **No PII:** All records are anonymized and simulated
+
+To use this dataset, download `credit_risk_dataset.csv` from the Kaggle link above and place it in the project root directory, then load it via **Option 3** in the CLI.
+
+---
+
+## 🎯 What We're Trying to Achieve
+
+This project has three interconnected goals:
+
+**1. Build an interpretable credit risk scoring engine**
+Rather than treating the model as a black box, we construct a transparent, rule-based scoring system where each factor has a defined weight and contribution. This mirrors how credit committees in banks actually work — they need to explain *why* a loan was declined, not just *that* it was declined. Interpretability is not just a nice-to-have; it is a regulatory requirement under frameworks like IFRS 9 and BSP Circular No. 855.
+
+**2. Analyze a real portfolio for risk concentration**
+Using the Kaggle dataset as a proxy for a real loan book, we want to answer questions like: What percentage of the portfolio is high-risk? Which loan grades or income bands concentrate the most default risk? Are there patterns in loan intent (e.g., medical vs. educational loans) that correlate with higher default rates? These are the exact questions a credit analyst or risk manager would bring to a portfolio review meeting.
+
+**3. Produce actionable, visual outputs for stakeholders**
+Raw numbers are not enough. The project generates a **4-panel risk dashboard** (saved as PNG) and a **scored CSV report** that can be shared with credit committees or imported into BI tools like Power BI or Tableau. The goal is to close the gap between data analysis and decision-making.
+
+Ultimately, this project demonstrates a core skillset for analytics professionals in banking: the ability to take raw borrower data, apply structured risk logic, and surface insights that drive lending decisions.
+
+---
+
+## 📌 What It Does
+
+This tool helps analysts evaluate the **credit risk** of individual loan applicants or entire portfolios by computing a **composite risk score (0–100)** based on five key financial factors:
+
+| Factor | Weight | Why It Matters |
+|---|---|---|
+| Credit Score | Up to 35 pts | Reflects borrower's repayment history |
+| Debt-to-Income (DTI) Ratio | Up to 25 pts | Measures capacity to service new debt |
+| Employment Status | Up to 15 pts | Indicates income stability |
+| Loan-to-Value (LTV) Ratio | Up to 15 pts | Gauges collateral adequacy |
+| Missed Payments | Up to 10 pts | Direct signal of default behavior |
+
+**Risk Tiers:**
+
+| Score | Tier | Recommendation |
+|---|---|---|
+| 0 – 25 | 🟢 LOW | Approve |
+| 26 – 50 | 🟡 MEDIUM | Review with conditions |
+| 51 – 75 | 🔴 HIGH | Escalate for credit committee |
+| 76 – 100 | ⚫ VERY HIGH | Likely decline |
+
+---
+
+## 🚀 Quick Start
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/YOUR_USERNAME/credit-risk-analyzer.git
+cd credit-risk-analyzer
+```
+
+### 2. Install dependencies (optional — for charts only)
+
+```bash
+pip install -r requirements.txt
+```
+
+> The CLI and CSV features work without any installs. Charts require `matplotlib` and `numpy`.
+
+### 3. Run the analyzer
+
+```bash
+python credit_risk.py
+```
+
+---
+
+## 🖥️ CLI Menu
+
+```
+╔══════════════════════════════════════════════════════╗
+║        CREDIT RISK ANALYZER  v1.0                   ║
+║        Banking & Financial Services Analytics        ║
+╚══════════════════════════════════════════════════════╝
+
+  [1]  Score a single applicant
+  [2]  Analyze sample portfolio (50 applicants)
+  [3]  Load portfolio from CSV file
+  [4]  Exit
+```
+
+### Option 1 — Score a single applicant
+Enter an applicant's details interactively and get an instant risk score with a visual bar indicator.
+
+### Option 2 — Sample portfolio analysis
+Generates 50 synthetic applicants, scores them, and outputs:
+- `output/scored_applicants.csv` — full results table
+- `output/risk_dashboard.png` — 4-chart visual dashboard
+
+### Option 3 — Load your own CSV
+Provide a CSV file with the required columns and get the same analysis on your own data.
+
+---
+
+## 📂 Project Structure
+
+```
+credit-risk-analyzer/
+│
+├── credit_risk.py          # Main application
+├── requirements.txt        # Optional dependencies
+├── sample_applicants.csv   # 10-row test dataset
+├── output/                 # Generated reports and charts (auto-created)
+└── README.md
+```
+
+---
+
+## 📋 CSV Input Format
+
+Your CSV must include these columns:
+
+```
+id, name, credit_score, dti_ratio, employment_status, ltv_ratio, missed_payments, loan_amount
+```
+
+**Example row:**
+```
+APP-0001,Juan dela Cruz,720,0.28,employed,0.75,0,2500000
+```
+
+A sample file (`sample_applicants.csv`) is included for reference.
+
+---
+
+## 📊 Sample Dashboard Output
+
+Running Option 2 produces a 4-panel dashboard:
+
+1. **Risk Tier Distribution** — Bar chart of how applicants are spread across tiers
+2. **Risk Score Histogram** — Distribution of raw scores with average line
+3. **Credit Score vs Risk Score** — Scatter plot colored by tier
+4. **DTI Ratio vs Risk Score** — Scatter plot showing DTI's impact on risk
+
+---
+
+## 🧠 Concepts Covered
+
+This project is a practical introduction to:
+
+- **Credit risk modeling** fundamentals (DTI, LTV, payment history)
+- Python **dictionaries and lists** for structured data
+- **CSV read/write** with Python's built-in `csv` module
+- **Data visualization** with matplotlib
+- Simple **CLI application** design with a menu loop
+- **Modular code** organization with functions
+
+---
+
+## 🔧 Possible Enhancements
+
+- [ ] Add machine learning scoring with `scikit-learn`
+- [ ] Integrate a real credit bureau API
+- [ ] Add Basel III / IFRS 9 Expected Credit Loss (ECL) modeling
+- [ ] Build a web dashboard with Flask or Streamlit
+- [ ] Add unit tests with `pytest`
+- [ ] Export PDF reports
+
+---
+
+## 📄 License
+
+MIT License — free to use, modify, and distribute.
+
+---
+
+## 👤 Author
+
+Built as a portfolio project demonstrating credit risk analytics skills in Python.
+
+*Inspired by real banking and financial services workflows in the Philippines and APAC region.*
