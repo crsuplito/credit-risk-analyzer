@@ -152,6 +152,7 @@ Provide a CSV file with the required columns and get the same analysis on your o
 credit-risk-analyzer/
 │
 ├── credit_risk_analyzer.py          # Main application
+├── credit_risk_data.csv             # Example data from Kaggle
 ├── requirements.txt                 # Optional dependencies
 ├── sample_applicants.csv            # 10-row test dataset
 ├── output/                          # Generated reports and charts (auto-created)
