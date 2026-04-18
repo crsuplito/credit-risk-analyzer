@@ -1,4 +1,4 @@
-# 💳 Credit Risk Analyzer
+<img width="65" height="21" alt="image" src="https://github.com/user-attachments/assets/52d976df-3742-4c92-9f1d-b96a45612155" /># 💳 Credit Risk Analyzer
 
 A beginner-friendly Python CLI tool for **credit risk scoring and portfolio analysis** — built on top of the real-world [Kaggle Credit Risk Dataset](https://www.kaggle.com/datasets/laotse/credit-risk-dataset).
 
@@ -166,12 +166,12 @@ credit-risk-analyzer/
 Your CSV must include these columns:
 
 ```
-id, name, credit_score, dti_ratio, employment_status, ltv_ratio, missed_payments, loan_amount
+id, name, age, income, home_ownership, employment_length, loan_intent, loan_grade, loan_amount, loan_interest_rate, loan_status, loan_percent_income, prior_default_on_file, credit_history_length, current_loan_status
 ```
 
 **Example row:**
 ```
-APP-0001,Juan dela Cruz,720,0.28,employed,0.75,0,2500000
+APP-0001, Juan dela Cruz, 22, 11460947, RENT, 12, PERSONAL, D, 2500000, 16.02, 1, 0.59, Y, 3, DEFAULT
 ```
 
 A sample file (`sample_applicants.csv`) is included for reference.
