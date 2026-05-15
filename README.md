@@ -222,5 +222,3 @@ MIT License — free to use, modify, and distribute.
 ## 👤 Author
 
 Built as a portfolio project demonstrating credit risk analytics skills in Python.
-
-*Inspired by real banking and financial services workflows in the Philippines and APAC region.*
